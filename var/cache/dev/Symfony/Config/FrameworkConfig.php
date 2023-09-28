@@ -500,9 +500,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->validation;
     }
 
-    public function annotations(array $value = []): \Symfony\Config\Framework\AnnotationsConfig
+    /**
+     * @return \Symfony\Config\Framework\AnnotationsConfig|$this
+     */
+    public function annotations($value = [])
     {
-        if (null === $this->annotations) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['annotations'] = true;
+            $this->annotations = $value;
+
+            return $this;
+        }
+
+        if (!$this->annotations instanceof \Symfony\Config\Framework\AnnotationsConfig) {
             $this->_usedProperties['annotations'] = true;
             $this->annotations = new \Symfony\Config\Framework\AnnotationsConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -921,7 +931,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('annotations', $value)) {
             $this->_usedProperties['annotations'] = true;
-            $this->annotations = new \Symfony\Config\Framework\AnnotationsConfig($value['annotations']);
+            $this->annotations = \is_array($value['annotations']) ? new \Symfony\Config\Framework\AnnotationsConfig($value['annotations']) : $value['annotations'];
             unset($value['annotations']);
         }
 
@@ -1108,7 +1118,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['validation'] = $this->validation->toArray();
         }
         if (isset($this->_usedProperties['annotations'])) {
-            $output['annotations'] = $this->annotations->toArray();
+            $output['annotations'] = $this->annotations instanceof \Symfony\Config\Framework\AnnotationsConfig ? $this->annotations->toArray() : $this->annotations;
         }
         if (isset($this->_usedProperties['serializer'])) {
             $output['serializer'] = $this->serializer->toArray();

@@ -73,6 +73,6 @@ class __TwigTemplate_095b2db2efcc45c5b55eac41df861d2e extends Template
     <path d=\"M4 6v6a8 3 0 0 0 16 0v-6\"></path>
     <path d=\"M4 12v6a8 3 0 0 0 16 0v-6\"></path>
 </svg>
-", "@Doctrine/Collector/database.svg", "C:\\Users\\DELL\\Atelier3.3\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\database.svg");
+", "@Doctrine/Collector/database.svg", "C:\\Users\\DELL\\FirstProject\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\database.svg");
     }
 }
