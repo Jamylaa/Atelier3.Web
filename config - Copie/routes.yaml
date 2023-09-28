@@ -1,3 +1,0 @@
-#app_show:
- #   path: /Author/show/{name}
-  #  controller: 'App\Controller\AuthorController::showAuthor'
